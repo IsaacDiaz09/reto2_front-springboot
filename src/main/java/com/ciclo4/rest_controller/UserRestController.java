@@ -70,7 +70,7 @@ public class UserRestController {
 	 * @param email
 	 * @return
 	 */
-	@GetMapping("/emailexist/{correoElectronico}")
+	@GetMapping("/{correoElectronico}")
 	public boolean byEmail(@PathVariable("correoElectronico") String email) {
 		return userServiceImpl.verifyEmail(email);
 	}

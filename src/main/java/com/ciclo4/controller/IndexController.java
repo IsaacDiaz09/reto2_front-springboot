@@ -17,9 +17,15 @@ public class IndexController {
 	public String index() {
 		return "vistas/login";
 	}
+	
 	@GetMapping("/register" )
 	public String register(Model model) {
 		model.addAttribute("roles", service.getUserRoles());
 		return "vistas/register";
-	}	
+	}
+	
+	@GetMapping("/login_success")
+	public String loggedIn() {
+		return "vistas/login_success";
+	}
 }

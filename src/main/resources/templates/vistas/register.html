@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sing in | El mercader</title>
+    <title>Sign in | El mercader</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
@@ -35,30 +35,37 @@
                                 <div class="form-group">
 
                                     <div class="form-group row mb-3">
-                                        <label for="txtNombre" class="col-form-label col-5">Nombre de la
-                                            Empresa:</label>
+                                        <label for="idUser" class="col-form-label col-5">ID:</label>
                                         <div class="col-7">
-                                            <input type="text" id="name" name="name" class="form-control"
-                                                placeholder="Escriba el nombre de la Empresa" />
+                                            <input type="number" id="idUser" class="form-control" />
                                         </div>
                                     </div>
 
                                     <div class="form-group row mb-3">
-                                        <label for="txtNombre" class="col-form-label col-5">Email:</label>
+                                        <label for="txtNombre" class="col-form-label col-5">Nombre de la
+                                            Empresa:</label>
                                         <div class="col-7">
-                                            <input type="text" id="email" name="email" class="form-control"
+                                            <input type="text" id="name" class="form-control"
+                                                placeholder="Escriba el nombre" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row mb-3">
+                                        <label for="txtEmail" class="col-form-label col-5">Email:</label>
+                                        <div class="col-7">
+                                            <input type="text" id="email" class="form-control"
                                                 placeholder="Escriba su email" />
                                         </div>
                                     </div>
 
 
                                     <div class="form-group row mb-3">
-                                        <label for="txtNombre" class="col-form-label col-5">Contraseña</label>
+                                        <label for="txtClave" class="col-form-label col-5">Contraseña</label>
                                         <div class="col-7">
-                                            <input type="password" id="pass" name="password" class="form-control"
+                                            <input type="password" id="pass" class="form-control"
                                                 placeholder="Escriba su clave" />
                                             <small class="letra-gris">Debe tener minimo 8
-                                                    caracteres</small>
+                                                caracteres</small>
                                         </div>
                                     </div>
 
@@ -67,8 +74,54 @@
                                         <label for="passwordrepeat" class="col-form-label col-5">Confirmar
                                             contraseña</label>
                                         <div class="col-7">
-                                            <input type="password" id="pass2" name="password" class="form-control"
+                                            <input type="password" id="pass2" class="form-control"
                                                 placeholder="Confirme su clave" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row mb-3">
+                                        <label for="txtIdentification"
+                                            class="col-form-label col-5">Identificacion:</label>
+                                        <div class="col-7">
+                                            <input type="text" id="identification" class="form-control"
+                                                placeholder="Escriba su identificacion" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row mb-3">
+                                        <label for="txtCellphone" class="col-form-label col-5">Número celular
+                                        </label>
+                                        <div class="col-7">
+                                            <input type="text" id="cellphone" class="form-control"
+                                                placeholder="Escriba su celular" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row mb-3">
+                                        <label for="txtAddress" class="col-form-label col-5">Dirección:
+                                        </label>
+                                        <div class="col-7">
+                                            <input type="text" id="address" class="form-control"
+                                                placeholder="Escriba su direccion" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row mb-3">
+                                        <label for="txtType" class="col-form-label col-5">Tipo:</label>
+                                        <div class="col-7">
+                                            <select id="typeUser" class="form-control">
+                                                <option th:each="role: ${roles}" th:value="${role.key}"
+                                                    th:text="${role.value}"></option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row mb-3">
+                                        <label for="txtZone" class="col-form-label col-5">Zona
+                                        </label>
+                                        <div class="col-7">
+                                            <input type="text" id="zone" class="form-control"
+                                                placeholder="Escriba su zona" />
                                         </div>
                                     </div>
 

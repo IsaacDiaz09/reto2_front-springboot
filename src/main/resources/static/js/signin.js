@@ -3,10 +3,17 @@ import { mostrarMensaje, campoEstaVacio, urlbase ,regExEmail} from "./utils.js";
 // Valida los atributos del usuario, entonces lo guarda
 $(document).ready(function () {
     $("#btn-signin").click(function () {
+         // Se recupera el valor de los campos
         const nombre = $.trim($("#name").val());
         const email = $.trim($("#email").val());
+        const identification = $.trim($("#identification").val());
+        const cellphone = $.trim($("#cellphone").val());
+        const address = $.trim($("#address").val());
+        const zone = $.trim($("#zone").val());
+        const type = $("#typeUser").val();
         const password = $("#pass").val();
-        const confirmar = $("#pass2").val()
+        const confirmar = $("#pass2").val();
+        const id = $("#idUser").val();
 
         if (validaUsuario(nombre, email, password, confirmar) === false) {
             return;
@@ -15,9 +22,15 @@ $(document).ready(function () {
             $.get(urlbase + "/" + email, function (estaEnUso) {
                 if (estaEnUso === false) {
                     const user = {
+                        id: id,
                         name: nombre,
+                        identification:identification,
+                        address: address,
+                        cellPhone: cellphone,
                         email: email,
                         password: password,
+                        zone: zone,
+                        type: type
                     };
                     $.ajax({
                         url: `${urlbase}/new`,
@@ -30,7 +43,7 @@ $(document).ready(function () {
                         statusCode: {
                             201: function () {
                                 mostrarMensaje("Confirmacion", "Usuario  creado exitosamente", false);
-                                limpiarCampos($('#name'), $('#email'), $('#pass'), $('#pass2'));
+                                limpiarCampos();
                             },
                         },
                     }
@@ -77,9 +90,14 @@ function validaUsuario(nombre, email, password, confirmar) {
 }
 
 // Limpia los campos del formulario
-function limpiarCampos(nombre, email, pass, passConfirm) {
-    $(nombre).val("");
-    $(email).val("");
-    $(pass).val("");
-    $(passConfirm).val("");
+function limpiarCampos() {
+    $("#idUser").val("");
+    $('#name').val("");
+    $('#email').val("");
+    $('#pass').val("");
+    $('#pass2').val("");
+    $('#identification').val("");
+    $('#cellphone').val("");
+    $('#address').val("");
+    $('#zone').val("");
 }
