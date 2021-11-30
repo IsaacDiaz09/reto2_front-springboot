@@ -11,6 +11,10 @@
 </head>
 
 <body>
+
+	<header th:replace="plantillas/plantilla-header :: navBar">
+	</header>
+
 	<div class="container text-center" style="padding-top: 20px" ;>
 
 		<h4>Bienvenido <b>[[${#request.userPrincipal.principal.Name}]]</b></h4>
