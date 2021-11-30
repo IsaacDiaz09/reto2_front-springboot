@@ -15,7 +15,7 @@ $(document).ready(function () {
         const confirmar = $("#pass2").val();
         const id = $("#idUser").val();
 
-        if (validaUsuario(nombre, email, password, confirmar) === false) {
+        if (validaUsuario(nombre, email, password, confirmar, identification, address, cellphone, zone) === false) {
             return;
         } else {
             // Verificar email no en uso

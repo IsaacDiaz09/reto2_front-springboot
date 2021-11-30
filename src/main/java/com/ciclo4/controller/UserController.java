@@ -12,13 +12,13 @@ import com.ciclo4.model.dto.UserDTO;
 import com.ciclo4.service.UserServiceImpl;
 
 @Controller
-@RequestMapping("/app")
+@RequestMapping("/app/users")
 public class UserController {
 
 	@Autowired
 	private UserServiceImpl service;
 
-	@GetMapping("/users")
+	@GetMapping
 	public String usersPage(Model model) {
 		List<UserDTO> users = service.getAll();
 		
