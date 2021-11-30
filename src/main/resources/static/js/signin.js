@@ -1,9 +1,9 @@
-import { mostrarMensaje, campoEstaVacio, urlbase ,regExEmail} from "./utils.js";
+import { mostrarMensaje, campoEstaVacio, urlbase, regExEmail } from "./utils.js";
 
 // Valida los atributos del usuario, entonces lo guarda
 $(document).ready(function () {
     $("#btn-signin").click(function () {
-         // Se recupera el valor de los campos
+        // Se recupera el valor de los campos
         const nombre = $.trim($("#name").val());
         const email = $.trim($("#email").val());
         const identification = $.trim($("#identification").val());
@@ -24,7 +24,7 @@ $(document).ready(function () {
                     const user = {
                         id: id,
                         name: nombre,
-                        identification:identification,
+                        identification: identification,
                         address: address,
                         cellPhone: cellphone,
                         email: email,
@@ -58,15 +58,25 @@ $(document).ready(function () {
 
 
 // Valida que el email sea valido, la obligatoriedad de los campos, que las contraseñas coincidan y su longitud
-function validaUsuario(nombre, email, password, confirmar) {
+function validaUsuario(nombre, email, password, confirmar, identification, address, cellphone, zone) {
 
     if (
         campoEstaVacio(nombre) === true || campoEstaVacio(email) === true ||
-        campoEstaVacio(password) === true || campoEstaVacio(confirmar) === true
+        campoEstaVacio(password) === true || campoEstaVacio(confirmar) === true ||
+        campoEstaVacio(identification) === true || campoEstaVacio(address) === true ||
+        campoEstaVacio(cellphone) === true || campoEstaVacio(zone) === true
     ) {
         mostrarMensaje(
             "Error",
             "Todos los campos son requeridos, verifique e intente nuevamente",
+            true
+        );
+        return false;
+    }
+    else if (identification < 0) {
+        mostrarMensaje(
+            "Error",
+            "El ID no puede ser negativo",
             true
         );
         return false;
