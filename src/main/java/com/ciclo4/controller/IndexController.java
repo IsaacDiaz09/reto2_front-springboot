@@ -24,7 +24,7 @@ public class IndexController {
 		return "vistas/register";
 	}
 	
-	@GetMapping("/login_success")
+	@GetMapping("/app")
 	public String loggedIn() {
 		return "vistas/login_success";
 	}
