@@ -146,18 +146,34 @@ public class UserServiceImpl {
 		}
 	}
 
+	/**
+	 * borra un usuario si existe
+	 * @param idUser
+	 */
 	public void deleteUser(Integer idUser) {
 		Optional<User> user = userRepository.findById(idUser);
 		if (user.isPresent()) {
 			userRepository.deleteById(idUser);
 		}
 	}
-	
+	/**
+	 * regresa los roles disponibles de n usuario
+	 * @return
+	 */
 	public Map<String,String> getUserRoles(){
 		Map<String,String> map = new LinkedHashMap<String,String>();
 		map.put("COORD", "Coordinador de zona");
 		map.put("ASE", "Asesor comercial");
 		map.put("ADM", "Administrador");
 		return map;
+	}
+	
+	/**
+	 * regresa un usuario por id si lo encuentra
+	 * @param idUser
+	 * @return
+	 */
+	public Optional<User> getUserById(Integer idUser) {
+		return userRepository.findById(idUser);
 	}
 }
