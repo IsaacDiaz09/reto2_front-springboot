@@ -1,6 +1,6 @@
 import { mostrarMensaje, urlbase, limpiarCamposGadget, validaUsuario } from "./utils.js";
 
-// Valida los atributos del usuario, entonces lo guarda
+// Valida los atributos del producto, entonces lo guarda
 $(document).ready(function () {
     $("#btn-gadget").click(function () {
         // Se recupera el valor de los campos
