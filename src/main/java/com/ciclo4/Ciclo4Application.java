@@ -20,8 +20,8 @@ public class Ciclo4Application implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        //userRepository.deleteAll();
-        //gadgetRepository.deleteAll();
+        userRepository.deleteAll();
+        gadgetRepository.deleteAll();
     }
 
 }

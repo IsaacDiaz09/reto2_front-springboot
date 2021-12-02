@@ -70,7 +70,7 @@ public class UserRestController {
 	 * @param email
 	 * @return
 	 */
-	@GetMapping("/{correoElectronico}")
+	@GetMapping("/emailexist/{correoElectronico}")
 	public boolean byEmail(@PathVariable("correoElectronico") String email) {
 		return userServiceImpl.verifyEmail(email);
 	}
@@ -110,6 +110,7 @@ public class UserRestController {
 	 * @param idUser
 	 */
 	@DeleteMapping("/{id}")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable("id") Integer idUser) {
 		userServiceImpl.deleteUser(idUser);
 	}

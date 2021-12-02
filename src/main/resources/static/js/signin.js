@@ -19,7 +19,7 @@ $(document).ready(function () {
             return;
         } else {
             // Verificar email no en uso
-            $.get(urlbase + "/" + email, function (estaEnUso) {
+            $.get(urlbase + "/emailexist/" + email, function (estaEnUso) {
                 if (estaEnUso === false) {
                     const user = {
                         id: id,

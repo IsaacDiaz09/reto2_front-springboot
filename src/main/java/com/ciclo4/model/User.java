@@ -33,6 +33,10 @@ public class User {
 	 * Atributo identificación
 	 */
 	private String identification;
+    /**
+	 * Atributo Name
+	 */
+	private String name;
 	/**
 	 * Atributo dirección
 	 */
@@ -49,10 +53,6 @@ public class User {
 	 * Atributo Password
 	 */
 	private String password;
-	/**
-	 * Atributo Name
-	 */
-	private String name;
 	/**
 	 * Atributo zone
 	 */

@@ -7,6 +7,7 @@ const regExEmail =
 
 // RegEx para validar url
 const RegExUrl = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/;
+
 // Se llama cada que se quiera mostrar mensaje de error/confirmacion emergente
 const mostrarMensaje = (titulo, cuerpo, error) => {
     document.getElementById("titulomensaje").innerHTML = titulo;
