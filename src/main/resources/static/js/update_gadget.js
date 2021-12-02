@@ -1,19 +1,11 @@
-import { mostrarMensaje, urlbase, limpiarCamposUser, validaUsuario } from "./utils.js";
+import { mostrarMensaje, urlbase, limpiarCamposGadget, validaUsuario } from "./utils.js";
 
 // Valida los atributos del usuario, entonces lo guarda
 $(document).ready(function () {
-    $("#btn-user").click(function () {
+    $("#btn-gadget").click(function () {
         // Se recupera el valor de los campos
         const nombre = $.trim($("#name").val());
-        const email = $.trim($("#email").val());
-        const identification = $.trim($("#identification").val());
-        const cellphone = $.trim($("#cellphone").val());
-        const address = $.trim($("#address").val());
-        const zone = $.trim($("#zone").val());
-        const type = $("#typeUser").val();
-        const password = $("#pass").val();
-        const confirmar = $("#pass2").val();
-        const id = $("#idUser").val();
+        
         console.log(id, nombre, identification, address, cellphone, email, password, zone, type)
 
         if (validaUsuario(nombre, email, password, confirmar, identification, address, cellphone, zone) === false) {
@@ -31,7 +23,7 @@ $(document).ready(function () {
                 type: type
             };
             $.ajax({
-                url: `${urlbase}/user/update`,
+                url: `${urlbase}/gadget/update`,
                 type: "PUT",
                 data: JSON.stringify(user),
                 dataType: "json",

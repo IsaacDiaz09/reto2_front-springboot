@@ -4,15 +4,15 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.ciclo4.exception.BaseCustomException;
+import com.ciclo4.model.Role;
 import com.ciclo4.model.User;
-import com.ciclo4.model.dto.UserDTO;
-import com.ciclo4.model.request.NewUserRequest;
+import com.ciclo4.repository.RoleRepository;
 import com.ciclo4.repository.UserRepository;
 
 /**
@@ -21,60 +21,46 @@ import com.ciclo4.repository.UserRepository;
 @Service
 public class UserServiceImpl {
 
-	/**
-	 * Atributo Repositorio
-	 */
-	private final UserRepository userRepository;
+	@Autowired
+	private UserRepository userRepository;
 
-	/**
-	 * Constructor
-	 *
-	 * @param userRepository
-	 */
-	public UserServiceImpl(UserRepository userRepository) {
-		this.userRepository = userRepository;
-	}
+	@Autowired
+	private RoleRepository roleRepository;
 
 	/**
 	 * Método para obtener todos los usuarios
 	 *
 	 * @return
 	 */
-	public List<UserDTO> getAll() {
-		return userRepository.findAll().stream()
-				.map(user -> UserDTO.builder().id(user.getId()).identification(user.getIdentification())
-						.address(user.getAddress()).password(user.getPassword()).cellPhone(user.getCellPhone())
-						.name(user.getName()).email(user.getEmail()).type(user.getType()).zone(user.getZone()).build())
-				.collect(Collectors.toList());
+	public List<User> getAll() {
+		return userRepository.findAll();
+	}
+
+	public Optional<Role> getRoleByName(String name) {
+		return roleRepository.findByName(name);
 	}
 
 	/**
 	 * Método para crear un usuario
 	 *
 	 * @param user
-	 * @return
+	 * @return User
 	 */
-	public UserDTO newUser(NewUserRequest user) {
+	public User newUser(User user) {
 		userRepository.findByEmail(user.getEmail()).ifPresent(e -> {
 			throw new BaseCustomException("El correo ya existe", HttpStatus.BAD_REQUEST.value());
 		});
 
-		User savedUser = userRepository.save(User.builder().id(user.getId()).identification(user.getIdentification())
-				.email(user.getEmail()).name(user.getName()).cellPhone(user.getCellPhone()).address(user.getAddress())
-				.password(user.getPassword())// Eliminar por seguridad
-				.zone(user.getZone()).type(user.getType()).build());
+		User savedUser = userRepository.save(user);
 
-		return UserDTO.builder().id(savedUser.getId()).identification(savedUser.getIdentification())
-				.email(savedUser.getEmail()).name(savedUser.getName()).cellPhone(savedUser.getCellPhone())
-				.address(savedUser.getAddress()).password(savedUser.getPassword())// Eliminar por seguridad
-				.zone(savedUser.getZone()).type(savedUser.getType()).build();
+		return savedUser;
 	}
 
 	/**
 	 * Método para verificar si existe un usuario con el Email ingresado
 	 *
 	 * @param email
-	 * @return
+	 * @return boolean
 	 */
 	public boolean verifyEmail(String email) {
 		List<User> users = userRepository.findAll();
@@ -92,12 +78,12 @@ public class UserServiceImpl {
 	 *
 	 * @param email
 	 * @param pass
-	 * @return UserDTO
+	 * @return User
 	 */
-	public UserDTO byEmailPass(String email, String pass) {
-		List<UserDTO> users = getAll();
-		UserDTO notExist = UserDTO.builder().build();
-		for (UserDTO user : users) {
+	public User byEmailPass(String email, String pass) {
+		List<User> users = getAll();
+		User notExist = new User();
+		for (User user : users) {
 			if (email.equals(user.getEmail()) && pass.equals(user.getPassword())) {
 				return user;
 			}
@@ -111,7 +97,7 @@ public class UserServiceImpl {
 	 * @param user
 	 * @return User
 	 */
-	public User editUser(NewUserRequest user) {
+	public User editUser(User user) {
 		if (user.getId() != null) {
 			Optional<User> exist = userRepository.findById(user.getId());
 			if (exist.isPresent()) {
@@ -136,18 +122,18 @@ public class UserServiceImpl {
 				if (user.getZone() != null) {
 					exist.get().setZone(user.getZone());
 				}
-
+				if (user.getType()!= null) {
+					exist.get().setType(user.getType());
+				}
 				return userRepository.save(exist.get());
-			} else {
-				return new User();
 			}
-		} else {
-			return new User();
 		}
+		return new User();
 	}
 
 	/**
 	 * borra un usuario si existe
+	 * 
 	 * @param idUser
 	 */
 	public void deleteUser(Integer idUser) {
@@ -156,24 +142,27 @@ public class UserServiceImpl {
 			userRepository.deleteById(idUser);
 		}
 	}
-	/**
-	 * regresa los roles disponibles de n usuario
-	 * @return
-	 */
-	public Map<String,String> getUserRoles(){
-		Map<String,String> map = new LinkedHashMap<String,String>();
-		map.put("COORD", "Coordinador de zona");
-		map.put("ASE", "Asesor comercial");
-		map.put("ADM", "Administrador");
-		return map;
-	}
-	
+
 	/**
 	 * regresa un usuario por id si lo encuentra
+	 * 
 	 * @param idUser
 	 * @return
 	 */
 	public Optional<User> getUserById(Integer idUser) {
 		return userRepository.findById(idUser);
+	}
+
+	/**
+	 * regresa los roles disponibles de n usuario
+	 * 
+	 * @return Map
+	 */
+	public Map<String, String> getUserRoles() {
+		Map<String, String> map = new LinkedHashMap<String, String>();
+		map.put("COORD", "Coordinador de zona");
+		map.put("ASE", "Asesor comercial");
+		map.put("ADM", "Administrador");
+		return map;
 	}
 }

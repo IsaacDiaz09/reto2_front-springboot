@@ -1,5 +1,5 @@
 // Url del end-point rest
-const urlbase = "http://localhost:8080/api/user";
+const urlbase = "http://localhost:8080/api/";
 
 // RegEx para validar un direccion de email
 const regExEmail =
@@ -78,4 +78,7 @@ function validaUsuario(nombre, email, password, confirmar, id, address, cellphon
     return true;
 }
 
+function limpiaCamposGadget(){
+
+}
 export { mostrarMensaje, campoEstaVacio, urlbase, regExEmail , limpiarCamposUser, validaUsuario};

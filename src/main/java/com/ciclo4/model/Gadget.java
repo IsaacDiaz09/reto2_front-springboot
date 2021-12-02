@@ -3,14 +3,12 @@ package com.ciclo4.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import lombok.Builder;
 import lombok.Data;
 
 /**
  * @author CarlinGebyte
  */
 @Data
-@Builder
 @Document(collection = "gadgets")
 public class Gadget {
 	/**
@@ -41,7 +39,7 @@ public class Gadget {
 	/**
 	 * Atributo availability
 	 */
-	private Boolean availability = true;
+	private Boolean availability;
 	/**
 	 * Atributo quantity
 	 */

@@ -1,7 +1,9 @@
 package com.ciclo4.rest_controller;
 
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ciclo4.model.Role;
 import com.ciclo4.model.User;
-import com.ciclo4.model.dto.UserDTO;
-import com.ciclo4.model.request.NewUserRequest;
+import com.ciclo4.repository.RoleRepository;
 import com.ciclo4.service.UserServiceImpl;
 
 /**
@@ -28,19 +30,12 @@ import com.ciclo4.service.UserServiceImpl;
 		RequestMethod.DELETE })
 @RequestMapping("/api/user")
 public class UserRestController {
-	/**
-	 * Atributo Service
-	 */
-	private final UserServiceImpl userServiceImpl;
 
-	/**
-	 * Método constructor
-	 *
-	 * @param userServiceImpl
-	 */
-	public UserRestController(UserServiceImpl userServiceImpl) {
-		this.userServiceImpl = userServiceImpl;
-	}
+	@Autowired
+	private UserServiceImpl userServiceImpl;
+
+	@Autowired
+	private RoleRepository roleRepository;
 
 	/**
 	 * Método para obtener todos los usuarios
@@ -48,7 +43,7 @@ public class UserRestController {
 	 * @return
 	 */
 	@GetMapping("/all")
-	public List<UserDTO> getAll() {
+	public List<User> getAll() {
 		return userServiceImpl.getAll();
 	}
 
@@ -60,8 +55,13 @@ public class UserRestController {
 	 */
 	@PostMapping("/new")
 	@ResponseStatus(HttpStatus.CREATED)
-	public UserDTO newUser(@RequestBody NewUserRequest request) {
-		return userServiceImpl.newUser(request);
+	public User newUser(@RequestBody User user) {
+		Optional<Role> role = roleRepository.findByName(user.getType());
+		if (role.isPresent()) {
+			user.setRole(role.get());
+			return userServiceImpl.newUser(user);
+		}
+		return user;
 	}
 
 	/**
@@ -83,7 +83,7 @@ public class UserRestController {
 	 * @return
 	 */
 	@GetMapping("/{email}/{pass}")
-	public UserDTO byEmailPass(@PathVariable("email") String email, @PathVariable("pass") String pass) {
+	public User byEmailPass(@PathVariable("email") String email, @PathVariable("pass") String pass) {
 		return userServiceImpl.byEmailPass(email, pass);
 	}
 
@@ -95,8 +95,13 @@ public class UserRestController {
 	 */
 	@PutMapping("/update")
 	@ResponseStatus(HttpStatus.CREATED)
-	public User update(@RequestBody NewUserRequest request) {
-		return userServiceImpl.editUser(request);
+	public User update(@RequestBody User user) {
+		Optional<Role> role = roleRepository.findByName(user.getType());
+		if (role.isPresent()) {
+			user.setRole(role.get());
+			return userServiceImpl.editUser(user);
+		}
+		return user;
 	}
 
 	/**

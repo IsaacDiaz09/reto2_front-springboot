@@ -25,7 +25,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	/**
 	 * Se define este bean para no encriptar la contraseña y que no fallen los test
-	 * mastertech. -> Su uso esta desaconsejado y obsoleto.
+	 * mastertech -> Su uso esta desaconsejado y obsoleto.
 	 * 
 	 * @return NoOpPasswordEncoder
 	 */
@@ -49,14 +49,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers(resources).permitAll()
-				.antMatchers("/", "/error", "/api/**", "/login", "/register").permitAll()
+		http
+.authorizeRequests().antMatchers(resources).permitAll()
+				.antMatchers("/","/login", "/error", "/api/**").permitAll()
+				.antMatchers("/app/users/**").hasAuthority("ADM")
 				.anyRequest().authenticated().and().formLogin().loginPage("/login").permitAll()
 				.usernameParameter("email").passwordParameter("password").defaultSuccessUrl("/app")
 				.failureUrl("/login?error=true").and().logout().permitAll().logoutSuccessUrl("/login?logout")
-				.permitAll();
+				.permitAll()
+				.and()
+				.exceptionHandling().accessDeniedPage("/forbidden");
 
 		http.cors().and().csrf().disable();
 	}
-
+	
 }

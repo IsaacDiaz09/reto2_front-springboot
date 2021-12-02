@@ -33,7 +33,7 @@ $(document).ready(function () {
                         type: type
                     };
                     $.ajax({
-                        url: `${urlbase}/new`,
+                        url: `${urlbase}/api/new`,
                         type: "POST",
                         data: JSON.stringify(user),
                         dataType: "json",

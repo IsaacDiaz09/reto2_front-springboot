@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ciclo4.model.User;
-import com.ciclo4.model.dto.UserDTO;
 import com.ciclo4.service.UserServiceImpl;
 
 @Controller
@@ -21,7 +20,7 @@ public class UserController {
 
 	@GetMapping
 	public String usersPage(Model model) {
-		List<UserDTO> users = service.getAll();
+		List<User> users = service.getAll();
 
 		model.addAttribute("users", users);
 		return "vistas/users";
@@ -30,7 +29,7 @@ public class UserController {
 	@GetMapping("/add")
 	public String addUser(Model model) {
 		model.addAttribute("roles", service.getUserRoles());
-		model.addAttribute("text_h3", "Crea tu cuenta");
+		model.addAttribute("text_h3", "Registrar usuario");
 		model.addAttribute("user", new User());
 
 		return "vistas/new-user";
