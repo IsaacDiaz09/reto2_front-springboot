@@ -22,7 +22,7 @@
         <div class="row h-100">
             <div class="m-2">
                 <button type="button" class="btn btn-warning m-2" onclick="location.href='/app/'">Regresar</button>
-                <button type="button" class="btn btn-primary m-2" onclick="location.href='/app/users/add'">Añadir usuario</button>
+                <button sec:authorize="hasAuthority('ADM')" type="button" class="btn btn-primary m-2" onclick="location.href='/app/users/add'">Añadir usuario</button>
                 <table class="table table-striped table-bordered">
                     <thead class="thead-dark">
                         <tr>

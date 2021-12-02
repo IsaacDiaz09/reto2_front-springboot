@@ -52,7 +52,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 .authorizeRequests().antMatchers(resources).permitAll()
 				.antMatchers("/","/login", "/error", "/api/**").permitAll()
-				.antMatchers("/app/users/**").hasAuthority("ADM")
+				.antMatchers("/app/users/update").hasAuthority("ADM")
+				.antMatchers("/app/users/delete").hasAuthority("ADM")
+				.antMatchers("/app/users/add").hasAuthority("ADM")
 				.anyRequest().authenticated().and().formLogin().loginPage("/login").permitAll()
 				.usernameParameter("email").passwordParameter("password").defaultSuccessUrl("/app")
 				.failureUrl("/login?error=true").and().logout().permitAll().logoutSuccessUrl("/login?logout")

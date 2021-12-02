@@ -1,6 +1,8 @@
 package com.ciclo4.service;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -48,7 +50,6 @@ public class GadgetServiceImpl {
 				&& gadget.getAvailability() != null && gadget.getQuantity() != null
 				&& gadget.getPhotography() != null) {
 
-			gadget.setAvailability(true);
 			Gadget savedGadget = gadgetRepository.save(gadget);
 
 			return savedGadget;
@@ -104,6 +105,23 @@ public class GadgetServiceImpl {
 		if (gadget.isPresent()) {
 			gadgetRepository.deleteById(idGadget);
 		}
+	}
+
+	/**
+	 * Retorna un gadget si lo encuentra
+	 * 
+	 * @param id
+	 * @return Optional
+	 */
+	public Optional<Gadget> getGadgetById(Integer id) {
+		return gadgetRepository.findById(id);
+	}
+
+	public Map<Boolean, String> getAvailability() {
+		Map<Boolean, String> map = new LinkedHashMap<Boolean, String>();
+		map.put(true, "SI");
+		map.put(false, "NO");
+		return map;
 	}
 
 }

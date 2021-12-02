@@ -22,20 +22,29 @@ public class GadgetsController {
 	public String gadgetsPage(Model model) {
 		List<Gadget> gadgets = service.getAll();
 		model.addAttribute("gadgets", gadgets);
-		return "vistas/gadgets";
+		return "vistas/products/gadgets";
 	}
 
 	@GetMapping("/update")
-	public String editar(Gadget gadget,Model model) {
-		model.addAttribute("text_h3", "Editar gadget");
-
-		return "vistas/gadgets";
+	public String editar(Gadget gadget, Model model) {
+		gadget = service.getGadgetById(gadget.getId()).get();
+		model.addAttribute("gadget", gadget);
+		model.addAttribute("text_h3", "Editar producto");
+		model.addAttribute("availability", service.getAvailability());
+		return "vistas/products/update-gadget";
 	}
-	
+
 	@GetMapping("/add")
 	public String agregar(Gadget gadget, Model model) {
+		model.addAttribute("gadget", gadget);
 		model.addAttribute("text_h3", "Registrar producto");
 
-		return "vistas/new-gadget";
+		return "vistas/products/new-gadget";
+	}
+
+	@GetMapping("/delete")
+	public String eliminar(Gadget gadget, Model model) {
+		service.deleteGadget(gadget.getId());
+		return "redirect:/app/gadgets";
 	}
 }

@@ -23,7 +23,7 @@ public class UserController {
 		List<User> users = service.getAll();
 
 		model.addAttribute("users", users);
-		return "vistas/users";
+		return "vistas/users/users";
 	}
 
 	@GetMapping("/add")
@@ -32,7 +32,7 @@ public class UserController {
 		model.addAttribute("text_h3", "Registrar usuario");
 		model.addAttribute("user", new User());
 
-		return "vistas/new-user";
+		return "vistas/users/new-user";
 	}
 
 	@GetMapping("/update")
@@ -42,7 +42,7 @@ public class UserController {
 		model.addAttribute("text_h3", "Editar usuario");
 		model.addAttribute("roles", service.getUserRoles());
 
-		return "vistas/update-user";
+		return "vistas/users/update-user";
 	}
 
 	@GetMapping("/delete")

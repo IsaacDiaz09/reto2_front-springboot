@@ -24,6 +24,11 @@ public class IndexController {
 	
 	@GetMapping("/app")
 	public String loggedIn() {
-		return "vistas/login_success";
+		return "vistas/home";
+	}
+	
+	@GetMapping("/forbidden")
+	public String forbiddenPage() {
+		return "error/forbidden";
 	}
 }
