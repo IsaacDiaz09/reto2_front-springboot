@@ -2,7 +2,7 @@ import { mostrarMensaje, urlbase, limpiarCamposUser, validaUsuario } from "./uti
 
 // Valida los atributos del usuario, entonces lo guarda
 $(document).ready(function () {
-    $("#btn-signin").click(function () {
+    $("#btn-user").click(function () {
         // Se recupera el valor de los campos
         const nombre = $.trim($("#name").val());
         const email = $.trim($("#email").val());
@@ -19,7 +19,7 @@ $(document).ready(function () {
             return;
         } else {
             // Verificar email no en uso
-            $.get(urlbase + "/emailexist/" + email, function (estaEnUso) {
+            $.get(urlbase + "/user/emailexist/" + email, function (estaEnUso) {
                 if (estaEnUso === false) {
                     const user = {
                         id: id,
@@ -33,7 +33,7 @@ $(document).ready(function () {
                         type: type
                     };
                     $.ajax({
-                        url: `${urlbase}/api/new`,
+                        url: `${urlbase}/user/new`,
                         type: "POST",
                         data: JSON.stringify(user),
                         dataType: "json",

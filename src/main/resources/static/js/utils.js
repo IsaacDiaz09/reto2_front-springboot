@@ -34,7 +34,6 @@ function validaUsuario(nombre, email, password, confirmar, id, address, cellphon
         campoEstaVacio(email) === true ||
         campoEstaVacio(password) === true ||
         campoEstaVacio(confirmar) === true ||
-        campoEstaVacio(id) === true ||
         campoEstaVacio(address) === true ||
         campoEstaVacio(cellphone) === true ||
         campoEstaVacio(zone) === true

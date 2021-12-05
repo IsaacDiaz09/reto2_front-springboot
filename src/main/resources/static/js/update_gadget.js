@@ -14,8 +14,6 @@ $(document).ready(function () {
         const photo = $("#photo").val();
         const availability = $("#availability").val()
 
-        console.log(nombre, idGadget, brand, category, description, price, quantity, photo);
-
         if (validaProducto(nombre, idGadget, brand, category, description, price, quantity, photo) === false) {
             return;
         } else {
@@ -47,8 +45,8 @@ $(document).ready(function () {
                             "Producto editado exitosamente",
                             false
                         );
-                        limpiaCamposGadget();
                         window.location = "http://localhost:8080/app/gadgets";
+                        limpiaCamposGadget();
                     },
                 },
             });

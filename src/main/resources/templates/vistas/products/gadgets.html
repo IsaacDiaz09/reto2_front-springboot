@@ -52,7 +52,7 @@
                                 <td th:text="${gadget.availability} == true ? 'SI' : 'NO'"></td>
                                 <td th:text="${gadget.price}"></td>
                                 <td th:text="${gadget.quantity}"></td>
-                                <td> <img th:src="${gadget.photography}" width="50" height="50"></td>
+                                <td> <img th:src="${gadget.photography}" height="50" ></td>
                                 <td sec:authorize="hasAuthority('ADM')">
                                     <a th:href="@{/app/gadgets/update(id=${gadget.id})}" class="btn btn-secondary edit"
                                         href="#" role="button">

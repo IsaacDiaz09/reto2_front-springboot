@@ -10,7 +10,7 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.ciclo4</groupId>
-	<artifactId>ciclo4</artifactId>
+	<artifactId>reto2</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>ciclo4</name>
 	<description>ciclo4</description>

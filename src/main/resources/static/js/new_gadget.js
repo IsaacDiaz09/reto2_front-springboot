@@ -13,8 +13,6 @@ $(document).ready(function () {
         const quantity = $("#quantity").val();
         const photo = $("#photo").val();
 
-        console.log(nombre, idGadget, brand, category, description, price, quantity, photo);
-
         if (validaProducto(nombre, idGadget, brand, category, description, price, quantity, photo) === false) {
             return;
         } else {
