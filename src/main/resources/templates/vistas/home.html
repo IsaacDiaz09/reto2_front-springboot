@@ -27,14 +27,9 @@
                     <div class="container text-center" style="padding-top: 20px" ;>
 
                         <h4>Bienvenido <b>[[${#request.userPrincipal.principal.Name}]]</b></h4>
-                        <h5>Rol: <b sec:authentication="principal.authorities"></b></h5>
+                        <h5>Rol: <b>[[${#request.userPrincipal.principal.Role}]]</b></h5>
                         <hr>
 
-                        <div class='col-xs-6 col-lg-2'>
-                            <img src="" id="avatar" height="50">
-                        </div>
-                        <div class='col-xs-6 col-lg-10'>
-                        </div>
                     </div>
                 </div>
                 <div class="row">
